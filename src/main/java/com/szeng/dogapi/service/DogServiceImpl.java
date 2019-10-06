@@ -15,14 +15,15 @@ public class DogServiceImpl implements DogService {
     @Autowired
     DogRepository dogRepository;
 
-    public List<Dog> retrieveDogBreed() {
-        return (List<Dog>) dogRepository.findAll();
+    public List<String> retrieveDogBreed() {
+        return (List<String>) dogRepository.finAllBreeds();
     }
 
-//    public List<Dog> retrieveDogBreedById(String id) {
-//    }
-//
-//    public List<Dog> retrieveDogNames() {
-//
-//    }
+    public String retrieveDogBreedById(Long id) {
+        return (String) dogRepository.findBreedById(id);
+    }
+
+    public List<String> retrieveDogNames() {
+        return dogRepository.findAllDogNames();
+    }
 }
