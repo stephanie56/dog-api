@@ -7,11 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/dogs")
 public class DogController {
     private DogServiceImpl dogService;
 
@@ -29,15 +31,15 @@ public class DogController {
     }
 
 
-    /** Retrieve a list of Dog breeds by Id */
-    @GetMapping("/breeds/{id}")
-    public ResponseEntity<String> getDogBreedsById(@PathVariable Long id) {
+    /** Retrieve the dog breed by Id */
+    @GetMapping("/{id}/breed")
+    public ResponseEntity<String> getDogBreedById(@PathVariable Long id) throws Exception {
         String dogName = dogService.retrieveDogBreedById(id);
         return new ResponseEntity<String>(dogName, HttpStatus.OK);
     }
 
-    /** Retrieve a list of Dog name */
-    @GetMapping("/names")
+    /** Retrieve a list of dog names */
+    @GetMapping("/breeds/names")
     public ResponseEntity<List<String>> getDogNames() {
         List<String> list = dogService.retrieveDogNames();
         return new ResponseEntity<List<String>>(list, HttpStatus.OK);

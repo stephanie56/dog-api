@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DogServiceImpl implements DogService {
@@ -15,14 +16,19 @@ public class DogServiceImpl implements DogService {
     @Autowired
     DogRepository dogRepository;
 
+    @Override
     public List<String> retrieveDogBreed() {
-        return (List<String>) dogRepository.finAllBreeds();
+        return dogRepository.finAllBreeds();
     }
 
+    @Override
     public String retrieveDogBreedById(Long id) {
-        return (String) dogRepository.findBreedById(id);
+        Optional<String> optionalBreed = Optional.ofNullable(dogRepository.findBreedById(id));
+        String breed = optionalBreed.orElseThrow(DogNotFoundException::new);
+        return breed;
     }
 
+    @Override
     public List<String> retrieveDogNames() {
         return dogRepository.findAllDogNames();
     }
