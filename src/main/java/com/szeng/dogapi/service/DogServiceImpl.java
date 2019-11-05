@@ -23,7 +23,11 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public String retrieveDogBreedById(Long id) {
+        /* Optional is intended to provide a mechanism for method return types
+         * where there needed to be a clear way to represent "no result"
+         */
         Optional<String> optionalBreed = Optional.ofNullable(dogRepository.findBreedById(id));
+        /* Use orElseThrow Not Found exception in case the result is null */
         String breed = optionalBreed.orElseThrow(DogNotFoundException::new);
         return breed;
     }
