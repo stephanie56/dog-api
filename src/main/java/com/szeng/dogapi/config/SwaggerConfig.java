@@ -25,7 +25,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                .useDefaultResponseMessages(false);
+                .useDefaultResponseMessages(false); // turns off default response
     }
 
     // Adding contacts for the API doc

@@ -1,7 +1,8 @@
 package com.szeng.dogapi.web;
 
-import com.szeng.dogapi.entity.Dog;
 import com.szeng.dogapi.service.DogServiceImpl;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@ApiResponses(value = {
+        @ApiResponse(code=400, message="This is a bad request, please follow the API documentation for the proper request format."),
+        @ApiResponse(code=401, message="Due to security constrains, your access request cannot be authorized."),
+        @ApiResponse(code=500, message="The server is down. Please make sure that the Dog microservice is running")
+})
 @RequestMapping("/dogs")
 public class DogController {
     private DogServiceImpl dogService;
